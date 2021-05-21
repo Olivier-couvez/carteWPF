@@ -27,7 +27,7 @@ namespace DonneesNavigation
         private RecupNav recupdonnees;
         DispatcherTimer timerRecup = new DispatcherTimer();
         string lesDonnees = "";
-        string[] lesDonneesLignes = new string[];
+        string[] lesDonneesLignes = new string[1];
         
 
         public MainWindow()
