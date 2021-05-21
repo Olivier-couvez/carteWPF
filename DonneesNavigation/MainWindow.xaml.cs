@@ -28,7 +28,10 @@ namespace DonneesNavigation
         DispatcherTimer timerRecup = new DispatcherTimer();
         string lesDonnees = "";
         string[] lesDonneesLignes = new string[1];
-        
+        string[] laLigne = new string[1];
+        string heure;
+        string lat, lon, latSens, lonSens;
+
 
         public MainWindow()
         {
@@ -51,9 +54,21 @@ namespace DonneesNavigation
             {
                 lesDonnees = recupdonnees.Lecture();
 
-                
-
                 lesDonneesLignes = Regex.Split(lesDonnees, "\n\\s*");
+                for (int i = 0; i<lesDonneesLignes.Length;i++)
+                {
+                    laLigne = Regex.Split(lesDonneesLignes[i], ",");
+                    if (laLigne[0] == "$GPGGA")
+                    {
+                        heure = laLigne[1];
+                        lat = laLigne[2];
+                        latSens = laLigne[3];
+                        lon = laLigne[4];
+                        lonSens = laLigne[5];
+                    }
+                }
+
+                
             }
             catch
             {
@@ -71,6 +86,13 @@ namespace DonneesNavigation
                     btnQuitter.Focus();
                 }
             }
+
+
+            txtbHeure.Text = heure;
+            txtbLat.Text = lat + " - " + latSens;
+            txtbLon.Text = lon + " - " + lonSens;
+            txtblAffichageRecup.Text = txtblAffichageRecup.Text + heure + " / " + lat + " - " + latSens + " / " + lon + " - " + lonSens + "\n";
+
         }
 
 
